@@ -17,7 +17,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/">
-            Home
+            <h1>Home</h1>
           </Route>
           <Route>404 - Not Found</Route>
         </Switch>
