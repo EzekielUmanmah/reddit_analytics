@@ -30,7 +30,7 @@ describe('Footer', () => {
     const link = within(container).getByRole('link', { name: /logo.svg/i });
     userEvent.click(link);
 
-    expect(screen.getByRole('heading', { name: /home/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /no reactions to/i })).toBeInTheDocument();
   });
 
   test('profy.dev link points to external page', () => {
