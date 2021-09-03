@@ -8,6 +8,7 @@ import theme from './styles/theme';
 
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
+import Home from './Components/Home/Home';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/">
-            <h1>Home</h1>
+            <Home />
           </Route>
           <Route>404 - Not Found</Route>
         </Switch>
