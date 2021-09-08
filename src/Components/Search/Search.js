@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -18,32 +21,37 @@ import * as S from './styles';
 
 const Search = () => {
   const [subreddit, setSubreddit] = useState('javascript');
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const history = useHistory();
 
   const search = async (e) => {
     e.preventDefault();
-    setPosts(null);
-
-    const url = `https://www.reddit.com/r/${subreddit}/top.json?limit=100&t=year`;
     try {
-      let count = 5;
-      const temp = [];
-      while (count > 0) {
-        // eslint-disable-next-line no-await-in-loop
-        const { data } = await axios.get(url);
-        temp.push(...data.data.children);
-        count -= 1;
-      }
-      setPosts(temp);
+      const url = `https://www.reddit.com/r/${subreddit}/top.json?limit=100&t=year`;
+      await axios.get(url)
+        .then((res) => {
+          setPosts(res.data.data.children);
+          axios.get(`${url}&after=${res.data.data.after}`)
+            .then((res) => {
+              setPosts((post) => [...post, ...res.data.data.children]);
+              axios.get(`${url}&after=${res.data.data.after}`)
+                .then((res) => {
+                  setPosts((post) => [...post, ...res.data.data.children]);
+                  axios.get(`${url}&after=${res.data.data.after}`)
+                    .then((res) => {
+                      setPosts((post) => [...post, ...res.data.data.children]);
+                      axios.get(`${url}&after=${res.data.data.after}`)
+                        .then((res) => setPosts((post) => [...post, ...res.data.data.children]));
+                    });
+                });
+            });
+        });
       history.push(`/search/${subreddit}`);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
-      setPosts(null);
     }
   };
-
+  console.log('posts', posts);
   return (
     <S.Container>
       <S.Form>
