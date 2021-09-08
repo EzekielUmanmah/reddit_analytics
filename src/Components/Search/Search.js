@@ -28,30 +28,34 @@ const Search = () => {
     e.preventDefault();
     try {
       const url = `https://www.reddit.com/r/${subreddit}/top.json?limit=100&t=year`;
+
       await axios.get(url)
         .then((res) => {
           setPosts(res.data.data.children);
-          axios.get(`${url}&after=${res.data.data.after}`)
-            .then((res) => {
-              setPosts((post) => [...post, ...res.data.data.children]);
-              axios.get(`${url}&after=${res.data.data.after}`)
-                .then((res) => {
-                  setPosts((post) => [...post, ...res.data.data.children]);
-                  axios.get(`${url}&after=${res.data.data.after}`)
-                    .then((res) => {
-                      setPosts((post) => [...post, ...res.data.data.children]);
-                      axios.get(`${url}&after=${res.data.data.after}`)
-                        .then((res) => setPosts((post) => [...post, ...res.data.data.children]));
-                    });
-                });
-            });
+          return axios.get(`${url}&after=${res.data.data.after}`);
+        })
+        .then((res) => {
+          setPosts((post) => [...post, ...res.data.data.children]);
+          return axios.get(`${url}&after=${res.data.data.after}`);
+        })
+        .then((res) => {
+          setPosts((post) => [...post, ...res.data.data.children]);
+          return axios.get(`${url}&after=${res.data.data.after}`);
+        })
+        .then((res) => {
+          setPosts((post) => [...post, ...res.data.data.children]);
+          return axios.get(`${url}&after=${res.data.data.after}`);
+        })
+        .then((res) => {
+          setPosts((post) => [...post, ...res.data.data.children]);
         });
+
       history.push(`/search/${subreddit}`);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log('posts', posts);
+
   return (
     <S.Container>
       <S.Form>
