@@ -1,43 +1,55 @@
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import * as S from './styles';
+import Form from './Form';
+import fetchData from './api';
+
+// const Posts = ({ posts }) => {
+//   const post = posts.map((item) => (
+//     <li key={item.data.id}>
+//       {item.data.id}
+//     </li>
+//   ));
+//   return (
+//     <>{post}</>
+//   );
+// };
 
 const Search = () => {
-  const [subreddit, setSubreddit] = useState('javascript');
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
+  const [status, setStatus] = useState('idle');
   const history = useHistory();
 
-  const search = async (e) => {
-    e.preventDefault();
-
-    const url = `https://www.reddit.com/r/${subreddit}/top.json`;
-
+  const getData = async (subreddit) => {
     try {
-      const { data } = await axios.get(url);
-      setPosts(data.data.children);
-
+      setStatus('loading');
+      const data = await fetchData(subreddit);
+      setPosts(data);
+      setStatus('resolved');
       history.push(`/search/${subreddit}`);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
-      setPosts(null);
     }
   };
 
   return (
     <S.Container>
-      <S.Form>
-        <S.Label>
-          r /
-          {'  '}
-          <S.Input name="subreddit" type="text" value={subreddit} onChange={(e) => setSubreddit(e.target.value)} />
-        </S.Label>
-        <S.Button onClick={search}>Search</S.Button>
-      </S.Form>
+      <Form getData={getData} />
       <br />
-      {posts ? posts.length : `/r ${subreddit} does not exist`}
+      {
+        status === 'loading' && (<div>Loading...</div>)
+      }
+      {
+        status === 'resolved' && (
+        <section>
+          Posts:
+          {posts.length}
+        </section>
+        )
+      }
     </S.Container>
   );
 };

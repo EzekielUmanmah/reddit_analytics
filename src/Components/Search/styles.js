@@ -16,7 +16,9 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
-
+  :focus, :active {
+    border: 1px solid #d5d5d5;
+  }
 `;
 
 export const Label = styled.label``;
