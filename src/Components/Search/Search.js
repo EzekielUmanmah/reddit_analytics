@@ -1,12 +1,11 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import * as S from './styles';
+import Form from './Form';
+import fetchData from './api';
 
 // const Posts = ({ posts }) => {
 //   const post = posts.map((item) => (
@@ -20,36 +19,16 @@ import * as S from './styles';
 // };
 
 const Search = () => {
-  const [subreddit, setSubreddit] = useState('javascript');
   const [posts, setPosts] = useState([]);
+  const [status, setStatus] = useState('idle');
   const history = useHistory();
 
-  const search = async (e) => {
-    e.preventDefault();
+  const getData = async (subreddit) => {
     try {
-      const url = `https://www.reddit.com/r/${subreddit}/top.json?limit=100&t=year`;
-
-      await axios.get(url)
-        .then((res) => {
-          setPosts(res.data.data.children);
-          return axios.get(`${url}&after=${res.data.data.after}`);
-        })
-        .then((res) => {
-          setPosts((post) => [...post, ...res.data.data.children]);
-          return axios.get(`${url}&after=${res.data.data.after}`);
-        })
-        .then((res) => {
-          setPosts((post) => [...post, ...res.data.data.children]);
-          return axios.get(`${url}&after=${res.data.data.after}`);
-        })
-        .then((res) => {
-          setPosts((post) => [...post, ...res.data.data.children]);
-          return axios.get(`${url}&after=${res.data.data.after}`);
-        })
-        .then((res) => {
-          setPosts((post) => [...post, ...res.data.data.children]);
-        });
-
+      setStatus('loading');
+      const data = await fetchData(subreddit);
+      setPosts(data);
+      setStatus('resolved');
       history.push(`/search/${subreddit}`);
     } catch (error) {
       console.log(error);
@@ -58,16 +37,19 @@ const Search = () => {
 
   return (
     <S.Container>
-      <S.Form>
-        <S.Label>
-          r /
-          {'  '}
-          <S.Input name="subreddit" type="text" value={subreddit} onChange={(e) => setSubreddit(e.target.value)} />
-        </S.Label>
-        <S.Button onClick={search}>Search</S.Button>
-      </S.Form>
+      <Form getData={getData} />
       <br />
-      {posts ? posts.length : ''}
+      {
+        status === 'loading' && (<div>Loading...</div>)
+      }
+      {
+        status === 'resolved' && (
+        <section>
+          Posts:
+          {posts.length}
+        </section>
+        )
+      }
     </S.Container>
   );
 };
