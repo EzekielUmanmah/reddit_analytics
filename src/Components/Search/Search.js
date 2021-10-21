@@ -13,7 +13,6 @@ const Search = () => {
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState('idle');
   const history = useHistory();
-  // console.log(posts);
   const getData = async (subreddit) => {
     try {
       setStatus('loading');

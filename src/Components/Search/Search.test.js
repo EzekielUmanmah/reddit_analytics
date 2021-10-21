@@ -65,6 +65,7 @@ describe('Search component tests', () => {
 
     const { history } = setup('/search');
 
+
     const input = screen.getByLabelText('r /');
     userEvent.clear(input);
     userEvent.type(input, 'nba');
