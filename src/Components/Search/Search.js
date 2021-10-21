@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
@@ -6,23 +7,12 @@ import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 import Form from './Form';
 import fetchData from './api';
-
-// const Posts = ({ posts }) => {
-//   const post = posts.map((item) => (
-//     <li key={item.data.id}>
-//       {item.data.id}
-//     </li>
-//   ));
-//   return (
-//     <>{post}</>
-//   );
-// };
+import Heatmap from './heatmap';
 
 const Search = () => {
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState('idle');
   const history = useHistory();
-
   const getData = async (subreddit) => {
     try {
       setStatus('loading');
@@ -44,10 +34,9 @@ const Search = () => {
       }
       {
         status === 'resolved' && (
-        <section>
-          Posts:
-          {posts.length}
-        </section>
+          <S.HeatContainer>
+            <Heatmap posts={posts} />
+          </S.HeatContainer>
         )
       }
     </S.Container>

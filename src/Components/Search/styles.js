@@ -7,6 +7,11 @@ export const Container = styled.section`
   align-items: center;
 `;
 
+export const HeatContainer = styled.section`
+  display: flex;
+  justify-content: center;
+`;
+
 export const Form = styled.form`
 
 `;

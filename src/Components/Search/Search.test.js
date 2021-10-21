@@ -63,7 +63,8 @@ describe('Search component tests', () => {
       .mockResolvedValueOnce({ data: { data: { children: [...mockResponse4.data.children], after: mockResponse4.data.after } } })
       .mockResolvedValueOnce({ data: { data: { children: [...mockResponse5.data.children], after: mockResponse5.data.after } } });
 
-    setup('/search');
+    const { history } = setup('/search');
+
 
     const input = screen.getByLabelText('r /');
     userEvent.clear(input);
@@ -71,12 +72,11 @@ describe('Search component tests', () => {
 
     const button = screen.getByRole('button', { name: /search/i });
     userEvent.click(button);
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
-
-    const posts = await waitFor(() => screen.findByText(/posts/i), {
-      timeout: 5000,
+    await waitFor(() => {
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
     });
-    expect(posts).toBeInTheDocument();
+
+    expect(history.location.pathname).toBe('/search/nba');
 
     const first = axios.get.mock.calls[0].toString();
     const second = axios.get.mock.calls[1].toString();
@@ -92,5 +92,8 @@ describe('Search component tests', () => {
     expect(fifth).toBe('https://www.reddit.com/r/nba/top.json?limit=100&t=year&after=t3_jjrd8q');
 
     expect(axios.get).toHaveBeenCalledTimes(5);
+
+    // test for heatmap presence
+    expect(await screen.findByText(/sun/i)).toBeInTheDocument();
   });
 });
