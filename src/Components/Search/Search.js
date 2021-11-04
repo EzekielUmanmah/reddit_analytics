@@ -7,12 +7,14 @@ import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 import Form from './Form';
 import fetchData from './api';
-import Heatmap from './heatmap';
+
+import Heatmap from './heatmap/heatmap';
 
 const Search = () => {
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState('idle');
   const history = useHistory();
+  
   const getData = async (subreddit) => {
     try {
       setStatus('loading');

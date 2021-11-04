@@ -39,7 +39,7 @@ describe('Search component tests', () => {
 
     const input = screen.getByLabelText('r /');
     // clear input first or 'reactjs' appends to default value 'javascript'
-    // supposedly resolved at https://github.com/testing-library/user-event/issues/301
+    // supposedly resolved at https://github.com/testing-library/user-event/issues/301 but isn't
     userEvent.clear(input);
     userEvent.type(input, 'reactjs');
 
@@ -52,7 +52,7 @@ describe('Search component tests', () => {
     // Because I'm testing a chained API request, every call resolves with a Promise,
     // instead of the data (I could possibly extract the final return variable **data**
     // from fetchData(), and pass it as props to fetchData().)
-    // Instead I mocked out the response object for each call, and verify that each
+    // Instead I mock out the response object for each call, and verify that each
     // call is called with the correct query param. **after**, thereby indirectly
     // confirming that fetchData() returns the correct result for each call.
 
@@ -64,7 +64,6 @@ describe('Search component tests', () => {
       .mockResolvedValueOnce({ data: { data: { children: [...mockResponse5.data.children], after: mockResponse5.data.after } } });
 
     const { history } = setup('/search');
-
 
     const input = screen.getByLabelText('r /');
     userEvent.clear(input);
@@ -92,8 +91,5 @@ describe('Search component tests', () => {
     expect(fifth).toBe('https://www.reddit.com/r/nba/top.json?limit=100&t=year&after=t3_jjrd8q');
 
     expect(axios.get).toHaveBeenCalledTimes(5);
-
-    // test for heatmap presence
-    expect(await screen.findByText(/sun/i)).toBeInTheDocument();
   });
 });
