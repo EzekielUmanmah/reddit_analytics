@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# How I worked on this project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My goal in building this project is to simulate a professional development environment as closely as possible. 
 
-## Available Scripts
+* The **marketing page (homepage)** is based on a design from Figma Designs
+* I built the homepage with Clickup, a Kanban based task app
+* Major app features are split into separate branches and Pull Requests
+
+## Project Highlights
+
+* Simple state logic management with **useState()**
+* Unique UI components with **styled-components**
+* Fetches data from the Reddit API and renders into a Heatmap
+* **Integration Tests** with Jest and React Testing Library
 
 In the project directory, you can run:
 
-### `yarn start`
+## Why I built the app this way
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* While I have built a full-stack MERN app with Redux Toolkit, I wanted to keep things simple for this project. For this app, useState() is sufficient, especially because the data is simply fetched and transformed and there is not any data that needs to be stored in between sessions.
+* For styling, I didn't want to box myself in using a framework like Material-UI. The **styled-components** library allows for great customization for defining styles next to the files that use them and for keeping my CSS skills sharp.
+* While this is a simple project, it allowed me to focus on the potential work flow of a professional developer. Building the homepage allowed me to see how tasks are assigned and tracked using **Clickup** and how major features should be split into separate branches, pushed to GitHub, reviewed, and finally merged into the main branch.
+* Testing is often cited by senior developers as a must. As **integration tests** seemed to offer the most coverage, I focused on ensuring testing what the user sees in the UI matches what happens behind the scenes. I used **React-testing-library** along with **Jest** to create tests that mocked out the Reddit API requests and confirmed that everything the user interacts with conforms with the code intent.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Future Improvements
 
-### `yarn test`
+* Add end-to-end testing with Cypress 
+* setup a Continuous Integration Pipeline to ensure no breaking changes are pushed onto the GitHub repository.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Available Scripts
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Fork and clone this repo and type **npm start**. Or you can check out the live version I've deployed.
