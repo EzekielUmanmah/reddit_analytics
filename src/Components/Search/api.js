@@ -27,7 +27,7 @@ const fetchData = async (subreddit) => {
         data.push(...res.data.data.children);
       });
   } catch (error) {
-    console.log(error);
+    return 'error';
   }
   return data;
 };
