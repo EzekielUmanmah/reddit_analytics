@@ -14,16 +14,20 @@ const Search = () => {
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState('idle');
   const history = useHistory();
-  
+
   const getData = async (subreddit) => {
     try {
       setStatus('loading');
       const data = await fetchData(subreddit);
-      setPosts(data);
-      setStatus('resolved');
-      history.push(`/search/${subreddit}`);
-    } catch (error) {
-      console.log(error);
+      if (data === 'error') {
+        setStatus('error');
+      } else {
+        setPosts(data);
+        setStatus('resolved');
+        history.push(`/search/${subreddit}`);
+      }
+    } catch (err) {
+      setStatus('error');
     }
   };
 
@@ -32,15 +36,18 @@ const Search = () => {
       <Form getData={getData} />
       <br />
       {
-        status === 'loading' && (<div>Loading...</div>)
-      }
+          status === 'error' && 'There was a network error or you entered an invalid subreddit. Please try again.'
+        }
       {
-        status === 'resolved' && (
-          <S.HeatContainer>
-            <Heatmap posts={posts} />
-          </S.HeatContainer>
-        )
-      }
+          status === 'loading' && (<div>Loading...</div>)
+        }
+      {
+          status === 'resolved' && (
+            <S.HeatContainer>
+              <Heatmap posts={posts} />
+            </S.HeatContainer>
+          )
+        }
     </S.Container>
   );
 };

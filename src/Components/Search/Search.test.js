@@ -92,4 +92,18 @@ describe('Search component tests', () => {
 
     expect(axios.get).toHaveBeenCalledTimes(5);
   });
+
+  it('renders an error message for invalid subreddits', async () => {
+    setup('/search');
+
+    const input = screen.getByLabelText('r /');
+    userEvent.clear(input);
+    userEvent.type(input, 'non-existen subreddit124897834');
+
+    const button = screen.getByRole('button', { name: /search/i });
+    userEvent.click(button);
+
+    const error = await screen.findByText(/there was a network/i);
+    expect(error).toBeInTheDocument();
+  });
 });
