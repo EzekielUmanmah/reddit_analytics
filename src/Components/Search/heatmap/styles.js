@@ -6,6 +6,7 @@ export const Container = styled.section`
 
 export const TableContainer = styled(Container)`
   width: 80%;
+  max-width: 1000px;
   margin: 0 auto;
   margin-top: 50px;
   font-family: ${(props) => props.theme.font.title};
@@ -29,7 +30,7 @@ export const Header = styled.th`
 `;
 
 export const Row = styled.tr`
-
+  text-align: left;
 `;
 
 export const Cell = styled.td`

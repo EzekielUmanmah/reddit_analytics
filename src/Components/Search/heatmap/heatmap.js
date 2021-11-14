@@ -7,6 +7,7 @@ import * as S from './styles';
 const Heatmap = ({ posts }) => {
   const [heatData, setHeatData] = useState();
   const [selectedPosts, setSelectedPosts] = useState();
+  const [cell, setCell] = useState();
 
   const xLabels = new Array(24).fill(0).map((_, i) => {
     let hour = new Date();
@@ -20,7 +21,7 @@ const Heatmap = ({ posts }) => {
     return `${hours}:00${ampm}`;
   });
 
-  const yLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const yLabels = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 
   const timeGrid = new Array(yLabels.length).fill(0).map(() => new Array(xLabels.length).fill(0));
 
@@ -39,6 +40,7 @@ const Heatmap = ({ posts }) => {
   }, [posts]);
 
   const table = (x, y) => {
+    setCell([x, y]);
     const filterPosts = posts.filter((post) => {
       const date = new Date(post.data.created_utc * 1000);
       const hour = date.getHours();
@@ -82,16 +84,24 @@ const Heatmap = ({ posts }) => {
             yLabels={yLabels}
             data={heatData}
             xLabelsStyle={(i) => ({
-              color: i % 2 ? 'transparent' : '#777',
+              color: i % 2 ? 'transparent' : '#1F2122',
               fontSize: '.8rem',
+              background: '#BFC2C3',
             })}
             yLabelsStyle={() => ({
               fontSize: '1rem',
+              color: '#E0E9E3',
+              background: '#0E3D51',
+              width: '120px',
+              textAlign: 'center',
             })}
             square
             cellHeight="3.5rem"
             cellRender={(x, y, val) => val && <div title={`Pos(${x}, ${y}) = ${val}`}>{val}</div>}
             onClick={(x, y) => table(x, y)}
+            cellStyle={(x, y) => cell && (x === cell[0] && y === cell[1] && ({
+              background: 'rgb(165, 165, 165)',
+            }))}
           />
           {
             selectedPosts && (
