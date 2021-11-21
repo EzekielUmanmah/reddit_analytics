@@ -2,8 +2,8 @@
 
 My goal in building this project is to simulate a professional development environment as closely as possible. 
 
-* The **marketing page (homepage)** is based on a design from [Figma Designs](https://user-images.githubusercontent.com/66026026/142641485-de0b1566-ed4b-4cc2-964f-d43d83c7f67e.png?raw=true)
-* I built the homepage with Clickup, a Kanban based task app
+* The **marketing page (homepage)** is based on a design from [Figma Designs](src/Components/Home/Hero/table.png)
+* I built the homepage with [ClickUp](https://user-images.githubusercontent.com/66026026/142641485-de0b1566-ed4b-4cc2-964f-d43d83c7f67e.png?raw=true), a Kanban based task app
 * Major app features are split into separate branches and Pull Requests
 
 ## Project Highlights
