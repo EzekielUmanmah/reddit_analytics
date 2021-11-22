@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-
+  margin-top: 50px;
 `;
 
 export const TableContainer = styled(Container)`
   width: 80%;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: auto;
   margin-top: 50px;
   font-family: ${(props) => props.theme.font.title};
 `;

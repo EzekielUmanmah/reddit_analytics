@@ -42,7 +42,7 @@ describe('Post Table Item', () => {
   it('renders post author and title as links', async () => {
     setup();
 
-    const cell = screen.getByTitle('Pos(1, 14) = 6');
+    const cell = screen.getByTitle('6 posts at Mon, 2 pm');
     userEvent.click(cell);
     // test post title link
     const title = screen.getByRole('link', { name: '[Scottie Pippen] I’m heartbrok...' });
@@ -58,7 +58,8 @@ describe('Post Table Item', () => {
 
   it('is not a link when author is [deleted]', () => {
     setup();
-    const cell = screen.getByTitle(/Pos\(1, 14\) = 6/i);
+
+    const cell = screen.getByTitle('6 posts at Mon, 2 pm');
     userEvent.click(cell);
 
     const author = screen.getByRole('cell', { name: '[deleted]' });

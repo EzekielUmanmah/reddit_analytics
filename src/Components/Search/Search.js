@@ -33,7 +33,6 @@ const Search = () => {
   return (
     <S.Container>
       <Form getData={getData} />
-      <br />
       {
           status === 'error' && 'There was a network error or you entered an invalid subreddit. Please try again.'
         }
@@ -42,9 +41,7 @@ const Search = () => {
         }
       {
           status === 'resolved' && (
-            <S.HeatContainer>
-              <Heatmap posts={posts} />
-            </S.HeatContainer>
+            <Heatmap posts={posts} />
           )
         }
     </S.Container>

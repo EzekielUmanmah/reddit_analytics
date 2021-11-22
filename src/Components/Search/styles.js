@@ -1,15 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const HeatContainer = styled.section`
-  display: flex;
-  justify-content: center;
 `;
 
 export const Form = styled.form`
@@ -17,7 +12,10 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-
+  background-color: #f5bf42;
+  border-radius: 5px;
+  color: ${(props) => props.theme.color.light};
+  margin-left: 10px;
 `;
 
 export const Input = styled.input`

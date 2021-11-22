@@ -97,7 +97,13 @@ const Heatmap = ({ posts }) => {
             })}
             square
             cellHeight="3.5rem"
-            cellRender={(x, y, val) => val && <div title={`Pos(${x}, ${y}) = ${val}`}>{val}</div>}
+            cellRender={(x, y, val) => {
+              let hours = y;
+              const ampm = hours >= 12 ? 'pm' : 'am';
+              hours %= 12;
+              hours = hours || 12;
+              return val && <div title={`${val} posts at ${yLabels[x]}, ${hours} ${ampm}`}>{val}</div>;
+            }}
             onClick={(x, y) => table(x, y)}
             cellStyle={(x, y) => cell && (x === cell[0] && y === cell[1] && ({
               background: 'rgb(165, 165, 165)',
