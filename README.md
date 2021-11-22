@@ -10,7 +10,7 @@ My goal in building this project is to simulate a professional development envir
 
 * Simple state logic management with **useState()**
 * Unique UI components with **styled-components**
-* Fetches data from the Reddit API and renders into a Heatmap
+* [Fetches data](src/Components/Search/api.js) from the Reddit API and renders into a Heatmap
 * **Integration Tests** with Jest and React Testing Library
 
 In the project directory, you can run:
