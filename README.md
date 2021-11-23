@@ -1,6 +1,6 @@
 # How I worked on this project
 
-My goal in building this project is to simulate a professional development environment as closely as possible. 
+My goal in building this project is to simulate a professional environment using the Agile methodology, focusing on continuous iterative development. 
 
 * The **marketing page (homepage)** is based on a design from [Figma Designs](https://user-images.githubusercontent.com/66026026/142780176-a2f1f955-a28b-48e9-8349-a8565c26622f.png)
 * I built the homepage with [ClickUp](https://user-images.githubusercontent.com/66026026/142641485-de0b1566-ed4b-4cc2-964f-d43d83c7f67e.png?raw=true), a Kanban based task app
